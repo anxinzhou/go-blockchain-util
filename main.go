@@ -18,4 +18,5 @@ func main() {
 	abi:=c.ABI()
 	log.Println(abi.Methods)
 	log.Println(abi.Events)
+	log.Println(c.EventSigByName("Aggregate"))
 }

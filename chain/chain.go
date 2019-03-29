@@ -13,21 +13,27 @@ import (
 
 const (
 	MAX_WAITING_BLOCK = 50 // come from web3js, if wait more than 50 blocks, transaction time out
-	DEFAULT_GAS_LIMIT = 3000000
-	DEFAULT_GAS_PRICE = 0
 	LOG_BUFFER = 128
 )
 
 type EthClient struct {
 	Client *ethclient.Client
-	ChainID *big.Int
+	ChainID *big.Int   // chain Id of current blockchain
 }
 
 func NewEthClient(socket string) (*EthClient, error) {
 	c := &EthClient{}
 	var err error
 	c.Client, err = ethclient.Dial(socket)
-	return c, err
+	if err!=nil {
+		return nil,err
+	}
+	chainId,err := c.GetChainId()
+	if err!=nil {
+		return nil,err
+	}
+	c.ChainID=chainId
+	return c, nil
 }
 
 func (c *EthClient) Close() {
@@ -114,7 +120,7 @@ func (c *EthClient) Call(msg * ethereum.CallMsg) ([]byte,error) {
 	return rVal,err
 }
 
-func (c *EthClient) EventWatcher(query *ethereum.FilterQuery)(chan types.Log,<-chan error) {
+func (c *EthClient) SubscribeEvent(query *ethereum.FilterQuery)(chan types.Log,<-chan error) {
 	logs := make(chan types.Log,LOG_BUFFER)
 	sub, err := c.Client.SubscribeFilterLogs(context.Background(), *query, logs)
 	if err!=nil {
