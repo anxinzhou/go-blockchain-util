@@ -68,7 +68,7 @@ type BridgeToken struct {
 	FuncPayNFT string
 }
 
-func NewBridgeToken(address common.Address,abi *abi.ABI) *BridgeToken {
+func NewBridgeToken(address common.Address,abi string) *BridgeToken {
 	bridgeToken:=&BridgeToken{}
 	bridgeToken.BaseContract = NewBaseContract(address,abi)
 	return bridgeToken

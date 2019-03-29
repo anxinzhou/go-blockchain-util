@@ -2,7 +2,6 @@ package contract
 
 import (
 	"github.com/ethereum/go-ethereum"
-	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
 	"math/big"
 )
@@ -20,9 +19,9 @@ type ERC20 struct {
 	*BaseContract
 }
 
-func NewERC20(address common.Address, abi *abi.ABI) *ERC20 {
+func NewERC20(address common.Address, abi string) *ERC20 {
 	erc20:=& ERC20{}
-	erc20.BaseContract = NewBaseContract(address,abi)
+	erc20.BaseContract = NewBaseContract(address, abi)
 	return erc20
 }
 

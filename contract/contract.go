@@ -42,12 +42,13 @@ type BaseContract struct {
 	eventHandlers map[string]eventHandler   // register subscribe event and handlers
 }
 
-func NewBaseContract(address common.Address,abi *abi.ABI) *BaseContract {
-	return &BaseContract{
+func NewBaseContract(address common.Address, abi string) *BaseContract {
+	c:=&BaseContract{
 		address:address,
-		abi:abi,
 		eventHandlers:make(map[string]eventHandler),
 	}
+	c.SetABIFromString(abi)
+	return c
 }
 
 func (c *BaseContract) RegisterHandler(event string, handler eventHandler) error {
