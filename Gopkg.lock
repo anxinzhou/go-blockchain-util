@@ -162,7 +162,6 @@
     "github.com/ethereum/go-ethereum/core/types",
     "github.com/ethereum/go-ethereum/crypto",
     "github.com/ethereum/go-ethereum/ethclient",
-    "github.com/xxRanger/blockchainUtil/contract",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1

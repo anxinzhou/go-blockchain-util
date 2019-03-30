@@ -1,7 +1,7 @@
 package contract
 
 import (
-	"github.com/xxRanger/blockchainUtil/chain"
+	"blockchainUtil/chain"
 	"encoding/json"
 	"errors"
 	"github.com/ethereum/go-ethereum"
@@ -31,42 +31,42 @@ type Contract interface {
 	EventSigByName(name string) (common.Hash, error)
 	Unpack(v interface{}, name string, output []byte) error
 	EventHandlers() map[string]eventHandler
-	Call(*ethereum.CallMsg) ([]byte,error)
+	Call(*ethereum.CallMsg) ([]byte, error)
 }
 
 type eventHandler func([]byte)
 
 type BaseContract struct {
-	address common.Address
-	abi     *abi.ABI
-	ethClient *chain.EthClient
-	eventHandlers map[string]eventHandler   // register subscribe event and handlers
+	address       common.Address
+	abi           *abi.ABI
+	ethClient     *chain.EthClient
+	eventHandlers map[string]eventHandler // register subscribe event and handlers
 }
 
 func NewBaseContract(address common.Address, abi string) *BaseContract {
-	c:=&BaseContract{
-		address:address,
-		eventHandlers:make(map[string]eventHandler),
+	c := &BaseContract{
+		address:       address,
+		eventHandlers: make(map[string]eventHandler),
 	}
 	c.SetABIFromString(abi)
 	return c
 }
 
 func (c *BaseContract) RegisterHandler(event string, handler eventHandler) error {
-	if c.eventHandlers==nil {
+	if c.eventHandlers == nil {
 		c.eventHandlers = make(map[string]eventHandler)
 	}
-	eventSigHash,err:=c.EventSigByName(event)
-	if err!=nil {
+	eventSigHash, err := c.EventSigByName(event)
+	if err != nil {
 		return err
 	}
 	c.eventHandlers[eventSigHash.Hex()] = handler
 	return nil
 }
 
-func (c *BaseContract) UnRegisterHandler(event string)  {
-	eventSigHash,_:= c.EventSigByName(event)
-	delete(c.eventHandlers,eventSigHash.Hex())
+func (c *BaseContract) UnRegisterHandler(event string) {
+	eventSigHash, _ := c.EventSigByName(event)
+	delete(c.eventHandlers, eventSigHash.Hex())
 }
 
 func (c *BaseContract) SetEventHandlers(eventHandlers map[string]eventHandler) {
@@ -145,7 +145,7 @@ func (c *BaseContract) EventSigByName(name string) (common.Hash, error) {
 		for j < len(eventBody) && eventBody[j] != ' ' && eventBody[j] != ',' && eventBody[j] != ')' {
 			j++
 		}
-		log.Println(i,j)
+		log.Println(i, j)
 		tmp := string(eventBody[i:j])
 		if _, ok := solidityType[tmp]; ok {
 			sigString.WriteString(tmp)
@@ -159,33 +159,33 @@ func (c *BaseContract) EventSigByName(name string) (common.Hash, error) {
 		i = j
 	}
 	sigString.WriteString(")")
-	sigByte:= []byte(sigString.String())
-	return crypto.Keccak256Hash(sigByte),nil
+	sigByte := []byte(sigString.String())
+	return crypto.Keccak256Hash(sigByte), nil
 }
 
 func (c *BaseContract) Unpack(v interface{}, name string, output []byte) error {
-	err:=c.abi.Unpack(v, name, output)
+	err := c.abi.Unpack(v, name, output)
 	return err
 }
 
 func (c *BaseContract) Subscribe() error {
-	topics:= make([][]common.Hash,1)
-	topics[0] = make([]common.Hash,0,len(c.eventHandlers))
-	for eventSig,_:= range c.eventHandlers {
-		topics[0]=append(topics[0],common.HexToHash(eventSig))
+	topics := make([][]common.Hash, 1)
+	topics[0] = make([]common.Hash, 0, len(c.eventHandlers))
+	for eventSig, _ := range c.eventHandlers {
+		topics[0] = append(topics[0], common.HexToHash(eventSig))
 	}
-	query:= &ethereum.FilterQuery{
+	query := &ethereum.FilterQuery{
 		Addresses: [] common.Address{c.address},
-		Topics: topics,
+		Topics:    topics,
 	}
-	logs,subScribeErr:= c.ethClient.SubscribeEvent(query)
+	logs, subScribeErr := c.ethClient.SubscribeEvent(query)
 	for {
 		select {
-		case err:=<-subScribeErr:
+		case err := <-subScribeErr:
 			log.Println(err.Error())
-		case vLog:= <-logs:
-			eventSig:= vLog.Topics[0].Hex()
-			if handler,ok:=c.eventHandlers[eventSig];ok {
+		case vLog := <-logs:
+			eventSig := vLog.Topics[0].Hex()
+			if handler, ok := c.eventHandlers[eventSig]; ok {
 				go handler(vLog.Data)
 			}
 		}

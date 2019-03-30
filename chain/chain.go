@@ -13,26 +13,26 @@ import (
 
 const (
 	MAX_WAITING_BLOCK = 50 // come from web3js, if wait more than 50 blocks, transaction time out
-	LOG_BUFFER = 128
+	LOG_BUFFER        = 128
 )
 
 type EthClient struct {
-	Client *ethclient.Client
-	ChainID *big.Int   // chain Id of current blockchain
+	Client  *ethclient.Client
+	ChainID *big.Int // chain Id of current blockchain
 }
 
 func NewEthClient(socket string) (*EthClient, error) {
 	c := &EthClient{}
 	var err error
 	c.Client, err = ethclient.Dial(socket)
-	if err!=nil {
-		return nil,err
+	if err != nil {
+		return nil, err
 	}
-	chainId,err := c.GetChainId()
-	if err!=nil {
-		return nil,err
+	chainId, err := c.GetChainId()
+	if err != nil {
+		return nil, err
 	}
-	c.ChainID=chainId
+	c.ChainID = chainId
 	return c, nil
 }
 
@@ -43,10 +43,9 @@ func (c *EthClient) Close() {
 	c.Client.Close()
 }
 
-
-func (c *EthClient) GetChainId()(*big.Int,error) {
+func (c *EthClient) GetChainId() (*big.Int, error) {
 	chainID, err := c.Client.NetworkID(context.Background())
-	return chainID,err
+	return chainID, err
 }
 
 func (c *EthClient) GetNonce(address common.Address) (uint64, error) {
@@ -62,8 +61,8 @@ func (c *EthClient) GetEther(address common.Address) (*big.Int, error) {
 func (c *EthClient) GetTransactionReceipt(txHash common.Hash) (chan *types.Receipt, chan error) {
 	count := 0
 	ch := make(chan *types.Header)
-	receipt := make(chan *types.Receipt,1)
-	receiptError := make(chan error,1)
+	receipt := make(chan *types.Receipt, 1)
+	receiptError := make(chan error, 1)
 	go func() {
 		sub, err := c.Client.SubscribeNewHead(context.Background(), ch)
 		if err != nil {
@@ -94,7 +93,7 @@ func (c *EthClient) GetTransactionReceipt(txHash common.Hash) (chan *types.Recei
 }
 
 func (c *EthClient) Send(tx *types.Transaction) chan error {
-	txError := make(chan error,1)
+	txError := make(chan error, 1)
 	go func() {
 		err := c.Client.SendTransaction(context.Background(), tx)
 		if err != nil {
@@ -115,18 +114,18 @@ func (c *EthClient) Send(tx *types.Transaction) chan error {
 	return txError
 }
 
-func (c *EthClient) Call(msg * ethereum.CallMsg) ([]byte,error) {
-	rVal, err:= c.Client.CallContract(context.Background(), *msg,nil)
-	return rVal,err
+func (c *EthClient) Call(msg *ethereum.CallMsg) ([]byte, error) {
+	rVal, err := c.Client.CallContract(context.Background(), *msg, nil)
+	return rVal, err
 }
 
-func (c *EthClient) SubscribeEvent(query *ethereum.FilterQuery)(chan types.Log,<-chan error) {
-	logs := make(chan types.Log,LOG_BUFFER)
+func (c *EthClient) SubscribeEvent(query *ethereum.FilterQuery) (chan types.Log, <-chan error) {
+	logs := make(chan types.Log, LOG_BUFFER)
 	sub, err := c.Client.SubscribeFilterLogs(context.Background(), *query, logs)
-	if err!=nil {
-		subScribeError:=make(chan error,1)
-		subScribeError<-err
-		return logs,subScribeError
+	if err != nil {
+		subScribeError := make(chan error, 1)
+		subScribeError <- err
+		return logs, subScribeError
 	}
 	return logs, sub.Err()
 }
