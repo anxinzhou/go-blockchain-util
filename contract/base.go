@@ -1,7 +1,7 @@
 package contract
 
 import (
-	"blockchainUtil/chain"
+	"github.com/xxRanger/blockchainUtil/chain"
 	"encoding/json"
 	"errors"
 	"github.com/ethereum/go-ethereum"
