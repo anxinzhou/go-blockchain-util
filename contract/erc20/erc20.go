@@ -1,7 +1,7 @@
 package erc20
 
 import (
-	"blockchainUtil/contract"
+	"github.com/xxRanger/blockchainUtil/contract"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"math/big"

@@ -1,8 +1,8 @@
 package gameToken
 
 import (
-	"blockchainUtil/contract"
-	"blockchainUtil/contract/erc20"
+	"github.com/xxRanger/blockchainUtil/contract"
+	"github.com/xxRanger/blockchainUtil/erc20"
 	"github.com/ethereum/go-ethereum/common"
 )
 

@@ -1,8 +1,8 @@
 package bridgeToken
 
 import (
-	"blockchainUtil/contract"
-	"blockchainUtil/contract/gameToken"
+	"github.com/xxRanger/blockchainUtil/contract"
+	"github.com/xxRanger/blockchainUtil/gameToken"
 	"github.com/ethereum/go-ethereum/common"
 	"math/big"
 )
