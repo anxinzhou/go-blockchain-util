@@ -31,6 +31,7 @@ type Contract interface {
 	EventSigByName(name string) (common.Hash, error)
 	Unpack(v interface{}, name string, output []byte) error
 	EventHandlers() map[string]eventHandler
+	Call(*ethereum.CallMsg) ([]byte,error)
 }
 
 type eventHandler func([]byte)
@@ -189,4 +190,8 @@ func (c *BaseContract) Subscribe() error {
 			}
 		}
 	}
+}
+
+func (c *BaseContract) Call(msg *ethereum.CallMsg) ([]byte, error) {
+	return c.ethClient.Call(msg)
 }

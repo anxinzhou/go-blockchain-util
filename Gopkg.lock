@@ -111,6 +111,14 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:9b774524232038f03bd03d15b14c164384459da77c81d10e1cb86999c5674cec"
+  name = "github.com/xxRanger/blockchainUtil"
+  packages = ["contract"]
+  pruneopts = "UT"
+  revision = "6c5e8af664861553a21eabadb08974cf6fe3bbdb"
+
+[[projects]]
+  branch = "master"
   digest = "1:d193d0292355f8fada46cf77967d64df52ce6e0a757f81a3a1b2626ac77d649d"
   name = "golang.org/x/crypto"
   packages = ["sha3"]
@@ -152,7 +160,9 @@
     "github.com/ethereum/go-ethereum/accounts/abi",
     "github.com/ethereum/go-ethereum/common",
     "github.com/ethereum/go-ethereum/core/types",
+    "github.com/ethereum/go-ethereum/crypto",
     "github.com/ethereum/go-ethereum/ethclient",
+    "github.com/xxRanger/blockchainUtil/contract",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1

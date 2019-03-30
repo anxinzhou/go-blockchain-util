@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f7efaff-a519-4233-9835-4aaeb08a8d00" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/contract/bridgeToken.go" beforeDir="false" afterPath="$PROJECT_DIR$/contract/bridgeToken.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contract/contract.go" beforeDir="false" afterPath="$PROJECT_DIR$/contract/contract.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contract/erc20.go" beforeDir="false" afterPath="$PROJECT_DIR$/contract/erc20.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contract/gameToken.go" beforeDir="false" afterPath="$PROJECT_DIR$/contract/gameToken.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contract/base.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gopkg.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gopkg.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gopkg.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Gopkg.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contract/bridgeToken.go" beforeDir="false" afterPath="$PROJECT_DIR$/contract/bridgeToken/bridgeToken.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contract/contract.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contract/erc20.go" beforeDir="false" afterPath="$PROJECT_DIR$/contract/erc20/erc20.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contract/gameToken.go" beforeDir="false" afterPath="$PROJECT_DIR$/contract/gameToken/gameToken.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,7 +56,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="go" value="12" />
+          <entry key="go" value="13" />
           <entry key="json" value="2" />
           <entry key="lock" value="1" />
           <entry key="toml" value="2" />
@@ -60,21 +64,21 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Go" value="12" />
+          <entry key="Go" value="13" />
           <entry key="JSON" value="2" />
           <entry key="TOML" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="go" value="11316" />
+          <entry key="go" value="11657" />
           <entry key="json" value="5" />
           <entry key="toml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Go" value="11316" />
+          <entry key="Go" value="11657" />
           <entry key="JSON" value="5" />
           <entry key="TOML" value="1" />
         </counts>
@@ -100,8 +104,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sender/sender.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="122" column="24" selection-start-line="122" selection-start-column="24" selection-end-line="122" selection-end-column="24" />
+            <state relative-caret-position="660">
+              <caret line="44" column="1" lean-forward="true" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="1" />
               <folding>
                 <element signature="e#14#255#0" expanded="true" />
               </folding>
@@ -110,12 +114,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/contract/contract.go">
+        <entry file="file://$PROJECT_DIR$/contract/base.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="50" column="12" selection-start-line="50" selection-start-column="12" selection-end-line="50" selection-end-column="12" />
+            <state relative-caret-position="267">
+              <caret line="185" column="27" selection-start-line="185" selection-start-column="27" selection-end-line="185" selection-end-column="27" />
               <folding>
-                <element signature="e#18#176#0" expanded="true" />
+                <element signature="e#18#277#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -125,28 +129,28 @@
         <entry file="file://$PROJECT_DIR$/Gopkg.toml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="424">
-              <caret line="35" selection-start-line="35" selection-end-line="38" selection-end-column="27" />
+              <caret line="35" selection-start-line="35" selection-end-line="42" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/contract/erc20.go">
+        <entry file="file://$PROJECT_DIR$/contract/erc20/erc20.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="72">
+              <caret line="24" column="49" selection-start-line="24" selection-start-column="49" selection-end-line="24" selection-end-column="49" />
               <folding>
-                <element signature="e#18#64#0" expanded="true" />
+                <element signature="e#15#116#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/contract/gameToken.go">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/contract/gameToken/gameToken.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="210">
+              <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
               <folding>
                 <element signature="e#18#118#0" expanded="true" />
               </folding>
@@ -154,11 +158,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/contract/bridgeToken.go">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/contract/bridgeToken/bridgeToken.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="70" column="53" selection-start-line="70" selection-start-column="53" selection-end-line="70" selection-end-column="53" />
+            <state relative-caret-position="195">
+              <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
               <folding>
                 <element signature="e#18#118#0" expanded="true" />
               </folding>
@@ -169,20 +173,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chain/chain.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="484">
+            <state relative-caret-position="1965">
               <caret line="131" column="1" selection-start-line="131" selection-start-column="1" selection-end-line="131" selection-end-column="1" />
               <folding>
                 <element signature="e#15#233#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/github.com/ethereum/go-ethereum/interfaces.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1995">
-              <caret line="140" column="55" selection-start-line="140" selection-start-column="55" selection-end-line="140" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -229,7 +224,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/contract/base.go" />
         <option value="$PROJECT_DIR$/chain/errors.go" />
         <option value="$PROJECT_DIR$/Gopkg.toml" />
         <option value="$PROJECT_DIR$/abi.json" />
@@ -237,9 +231,15 @@
         <option value="$PROJECT_DIR$/chain/chain.go" />
         <option value="$PROJECT_DIR$/user/user.go" />
         <option value="$PROJECT_DIR$/contract/contract.go" />
-        <option value="$PROJECT_DIR$/contract/bridgeToken.go" />
         <option value="$PROJECT_DIR$/contract/erc20.go" />
         <option value="$PROJECT_DIR$/contract/gameToken.go" />
+        <option value="$PROJECT_DIR$/contract/bridgeToken.go" />
+        <option value="$PROJECT_DIR$/sender/sender.go" />
+        <option value="$PROJECT_DIR$/contract/BridgeToken/bridgeToken.go" />
+        <option value="$PROJECT_DIR$/contract/base.go" />
+        <option value="$PROJECT_DIR$/contract/erc20/erc20.go" />
+        <option value="$PROJECT_DIR$/contract/gameToken/gameToken.go" />
+        <option value="$PROJECT_DIR$/contract/bridgeToken/bridgeToken.go" />
       </list>
     </option>
   </component>
@@ -255,8 +255,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="83" />
-    <option name="y" value="74" />
+    <option name="x" value="467" />
+    <option name="y" value="82" />
     <option name="width" value="922" />
     <option name="height" value="968" />
   </component>
@@ -287,7 +287,36 @@
             <path>
               <item name="blockchainUtil" type="b2602c69:ProjectViewProjectNode" />
               <item name="blockchainUtil" type="462c0819:PsiDirectoryNode" />
+              <item name="contract" type="462c0819:PsiDirectoryNode" />
+              <item name="bridgeToken" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blockchainUtil" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blockchainUtil" type="462c0819:PsiDirectoryNode" />
+              <item name="contract" type="462c0819:PsiDirectoryNode" />
+              <item name="erc20" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blockchainUtil" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blockchainUtil" type="462c0819:PsiDirectoryNode" />
+              <item name="contract" type="462c0819:PsiDirectoryNode" />
+              <item name="gameToken" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blockchainUtil" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blockchainUtil" type="462c0819:PsiDirectoryNode" />
               <item name="sender" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blockchainUtil" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blockchainUtil" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blockchainUtil" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blockchainUtil" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="github.com" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -308,6 +337,13 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/contract/GameToken" />
+      <recent name="$PROJECT_DIR$/contract/ERC20" />
+      <recent name="$PROJECT_DIR$/contract/BridgeToken" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -321,14 +357,14 @@
     </option>
   </component>
   <component name="ToolWindowManager">
-    <frame x="83" y="74" width="922" height="968" extended-state="0" />
+    <frame x="467" y="82" width="922" height="968" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26136363" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.32990867" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32990867" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -337,7 +373,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32990867" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32990867" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -391,9 +427,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Gopkg.toml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="424">
+          <caret line="35" selection-start-line="35" selection-end-line="42" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/chain/chain.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
+        <state relative-caret-position="1965">
           <caret line="131" column="1" selection-start-line="131" selection-start-column="1" selection-end-line="131" selection-end-column="1" />
           <folding>
             <element signature="e#15#233#0" expanded="true" />
@@ -403,55 +446,55 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sender/sender.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="122" column="24" selection-start-line="122" selection-start-column="24" selection-end-line="122" selection-end-column="24" />
+        <state relative-caret-position="660">
+          <caret line="44" column="1" lean-forward="true" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="1" />
           <folding>
             <element signature="e#14#255#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Gopkg.toml">
+    <entry file="file://$PROJECT_DIR$/contract/contract.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="35" selection-start-line="35" selection-end-line="38" selection-end-column="27" />
+        <state relative-caret-position="180">
+          <caret line="12" column="13" lean-forward="true" selection-end-line="192" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/contract/bridgeToken.go">
+    <entry file="file://$PROJECT_DIR$/contract/base.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="70" column="53" selection-start-line="70" selection-start-column="53" selection-end-line="70" selection-end-column="53" />
+        <state relative-caret-position="267">
+          <caret line="185" column="27" selection-start-line="185" selection-start-column="27" selection-end-line="185" selection-end-column="27" />
+          <folding>
+            <element signature="e#18#277#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/contract/erc20/erc20.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="24" column="49" selection-start-line="24" selection-start-column="49" selection-end-line="24" selection-end-column="49" />
+          <folding>
+            <element signature="e#15#116#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/contract/gameToken/gameToken.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
           <folding>
             <element signature="e#18#118#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/contract/contract.go">
+    <entry file="file://$PROJECT_DIR$/contract/bridgeToken/bridgeToken.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="50" column="12" selection-start-line="50" selection-start-column="12" selection-end-line="50" selection-end-column="12" />
-          <folding>
-            <element signature="e#18#176#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/contract/erc20.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="e#18#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/contract/gameToken.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        <state relative-caret-position="195">
+          <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
           <folding>
             <element signature="e#18#118#0" expanded="true" />
           </folding>
