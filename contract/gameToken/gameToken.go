@@ -1,9 +1,9 @@
 package gameToken
 
 import (
+	"github.com/ethereum/go-ethereum/common"
 	"github.com/xxRanger/blockchainUtil/contract"
 	"github.com/xxRanger/blockchainUtil/contract/erc20"
-	"github.com/ethereum/go-ethereum/common"
 )
 
 const (
