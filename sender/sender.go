@@ -1,14 +1,14 @@
 package sender
 
 import (
-	"blockchainUtil/chain"
-	"blockchainUtil/contract"
 	"context"
 	"crypto/ecdsa"
 	"errors"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/xxRanger/blockchainUtil/chain"
+	"github.com/xxRanger/blockchainUtil/contract"
 	"math/big"
 	"sync"
 )
