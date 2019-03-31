@@ -12,6 +12,8 @@ const (
 )
 
 const (
+	FuncConsume = "consume"
+	FuncReward = "reward"
 	FuncPayToken      string = "pay"
 	FuncPayNFT        string = "payNFT"
 	FuncExchangeToken string = "exchange"
