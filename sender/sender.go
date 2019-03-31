@@ -99,8 +99,23 @@ func (u *User) getNonce() (uint64, error) {
 }
 
 func (u *User) Transfer(to common.Address, value *big.Int) chan error {
-	//TODO
-	return nil
+	txError := make(chan error, 1)
+	nonce, err := u.getNonce()
+	if err != nil {
+		txError <- err
+		return txError
+	}
+	var tx *types.Transaction
+	if u.chainKind == CHAIN_KIND_PUBLIC {
+		tx =  types.NewTransaction(nonce,to,value,defaultPublicChainGasLimit,defaultPublicChainGasPrice,nil)
+	} else if u.chainKind == CHAIN_KIND_PRIVATE {
+		tx = types.NewTransaction(nonce,to,value, defaultPrivateChainGasLimit, defaultPrivateChainGasPrice,nil)
+	} else {
+		err:= errors.New("unknown chain kind")
+		txError <- err
+		return txError
+	}
+	return u.SendAndSignTransaction(tx)
 }
 
 func (u *User) SignTransaction(tx *types.Transaction) (*types.Transaction, error) {
