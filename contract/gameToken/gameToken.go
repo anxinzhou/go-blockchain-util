@@ -1,6 +1,7 @@
 package gameToken
 
 import (
+	"errors"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/xxRanger/blockchainUtil/contract"
@@ -58,4 +59,30 @@ func (c *GameToken) AvatarState(tokenId *big.Int) (*AvatarState,error) {
 		return nil, err
 	}
 	return avatarState, err
+}
+
+func (c *GameToken) OwnedAvatar(address common.Address) (*big.Int, error) {
+	funcName := "ownedAvatars"
+	input, err := c.Pack(funcName, address)
+	if err != nil {
+		return nil, err
+	}
+	contractAddress := c.Address()
+	data, err := c.Call(&ethereum.CallMsg{
+		To:   &contractAddress,
+		Data: input,
+	})
+	if err != nil {
+		return nil, err
+	}
+	tokenId := new(big.Int)
+	err = c.Unpack(tokenId, funcName, data)
+	if err != nil {
+		return nil, err
+	}
+	if tokenId.Cmp(big.NewInt(0))==0 {
+		err:=errors.New("user have no token")
+		return nil,err
+	}
+	return tokenId, err
 }
