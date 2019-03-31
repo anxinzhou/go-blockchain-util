@@ -52,16 +52,15 @@ func NewBaseContract(address common.Address, abi string) *BaseContract {
 	return c
 }
 
-func (c *BaseContract) RegisterHandler(event string, handler eventHandler) error {
+func (c *BaseContract) RegisterHandler(event string, handler eventHandler) {
 	if c.eventHandlers == nil {
 		c.eventHandlers = make(map[string]eventHandler)
 	}
 	eventSigHash, err := c.EventSigByName(event)
 	if err != nil {
-		return err
+		panic(err)
 	}
 	c.eventHandlers[eventSigHash.Hex()] = handler
-	return nil
 }
 
 func (c *BaseContract) UnRegisterHandler(event string) {
