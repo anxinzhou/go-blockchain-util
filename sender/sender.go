@@ -14,15 +14,29 @@ import (
 )
 
 func init() {
-	defaultGasLimit = 0
-	defaultGasPrice = big.NewInt(0)
-	defaultValue = big.NewInt(0)
+	defaultPrivateChainGasLimit = 3000000
+	defaultPrivateChainGasPrice = big.NewInt(0)
+	defaultPrivateChainValue = big.NewInt(0)
+
+	defaultPublicChainGasLimit = 3000000
+	defaultPublicChainGasPrice = big.NewInt(1000000000)  // 1 Gwei
+	defaultPublicChainValue = big.NewInt(0)
 }
 
+// chain kind
+const (
+	CHAIN_KIND_PRIVATE = 0
+	CHAIN_KIND_PUBLIC  = 1
+)
+
 var (
-	defaultGasLimit uint64
-	defaultGasPrice *big.Int
-	defaultValue    *big.Int
+	defaultPrivateChainGasLimit uint64
+	defaultPrivateChainGasPrice *big.Int
+	defaultPrivateChainValue    *big.Int
+
+	defaultPublicChainGasLimit uint64
+	defaultPublicChainGasPrice *big.Int
+	defaultPublicChainValue *big.Int
 )
 
 type SendOpts struct {
@@ -42,6 +56,7 @@ type User struct {
 type ChainInfo struct {
 	ethClient *chain.EthClient
 	nonce     *Nonce
+	chainKind int
 }
 
 type Nonce struct {
@@ -57,8 +72,9 @@ func NewUser(address common.Address, privateKey *ecdsa.PrivateKey) *User {
 }
 
 // bind and get nonce if non-nil
-func (u *User) BindEthClient(client *chain.EthClient) {
+func (u *User) BindEthClient(client *chain.EthClient, chainKind int) {
 	u.ethClient = client
+	u.chainKind = chainKind
 	u.nonce = &Nonce{
 		v:     0,
 		mutex: &sync.Mutex{},
@@ -83,6 +99,7 @@ func (u *User) getNonce() (uint64, error) {
 }
 
 func (u *User) Transfer(to common.Address, value *big.Int) chan error {
+	//TODO
 	return nil
 }
 
@@ -135,7 +152,15 @@ func (u *User) SendFunction(c contract.Contract, opt *SendOpts, funcName string,
 	contractAddress := c.Address()
 	var tx *types.Transaction
 	if opt == nil {
-		tx = types.NewTransaction(nonce, contractAddress, defaultValue, defaultGasLimit, defaultGasPrice, input)
+		if u.chainKind == CHAIN_KIND_PRIVATE {
+			tx = types.NewTransaction(nonce, contractAddress, defaultPublicChainValue, defaultPublicChainGasLimit, defaultPublicChainGasPrice, input)
+		} else if u.chainKind == CHAIN_KIND_PUBLIC {
+			tx = types.NewTransaction(nonce, contractAddress, defaultPrivateChainValue, defaultPrivateChainGasLimit, defaultPrivateChainGasPrice, input)
+		} else {
+			err:= errors.New("unknown chain kind")
+			txError <- err
+			return txError
+		}
 	} else {
 		tx = types.NewTransaction(nonce, *opt.To, opt.Value, opt.GasLimit, opt.GasPrice, input)
 	}
