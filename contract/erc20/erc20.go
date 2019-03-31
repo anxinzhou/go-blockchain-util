@@ -17,12 +17,12 @@ const (
 )
 
 type ERC20 struct {
-	*contract.BaseContract
+	contract.BaseContract
 }
 
 func NewERC20(address common.Address) *ERC20 {
 	erc20 := &ERC20{}
-	erc20.BaseContract = contract.NewBaseContract(address, ABI)
+	erc20.BaseContract = *contract.NewBaseContract(address, ABI)
 	return erc20
 }
 

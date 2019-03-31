@@ -46,11 +46,11 @@ type BridgeTokenEventExchangeNFT struct {
 }
 
 type BridgeToken struct {
-	*gameToken.GameToken
+	gameToken.GameToken
 }
 
 func NewBridgeToken(address common.Address) *BridgeToken {
 	bridgeToken := &BridgeToken{}
-	bridgeToken.BaseContract = contract.NewBaseContract(address, ABI)
+	bridgeToken.BaseContract = *contract.NewBaseContract(address, ABI)
 	return bridgeToken
 }

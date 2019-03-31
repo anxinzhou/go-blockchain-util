@@ -20,7 +20,7 @@ func init() {
 
 	defaultPublicChainGasLimit = 3000000
 	//defaultPublicChainGasPrice = big.NewInt(1000000000)  // 1 Gwei
-	defaultPublicChainGasPrice = big.NewInt(0)  // test
+	defaultPublicChainGasPrice = big.NewInt(0)  // test TODO
 	defaultPublicChainValue = big.NewInt(0)
 }
 
@@ -51,7 +51,7 @@ type SendOpts struct {
 type User struct {
 	Address    common.Address
 	privateKey *ecdsa.PrivateKey
-	*ChainInfo
+	ChainInfo
 }
 
 type ChainInfo struct {

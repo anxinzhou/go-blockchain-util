@@ -22,7 +22,7 @@ const (
 )
 
 type GameToken struct {
-	*erc20.ERC20
+	erc20.ERC20
 }
 
 type AvatarState struct {
@@ -34,7 +34,7 @@ type AvatarState struct {
 
 func NewGameToken(address common.Address) *GameToken {
 	gameToken := &GameToken{}
-	gameToken.BaseContract = contract.NewBaseContract(address, ABI)
+	gameToken.BaseContract = *contract.NewBaseContract(address, ABI)
 	return gameToken
 }
 
