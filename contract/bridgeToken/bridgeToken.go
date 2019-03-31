@@ -12,6 +12,7 @@ const (
 )
 
 const (
+	FuncMint = "mint"
 	FuncConsume = "consume"
 	FuncReward = "reward"
 	FuncPayToken      string = "pay"
