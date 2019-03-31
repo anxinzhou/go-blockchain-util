@@ -168,7 +168,10 @@ func (c *BaseContract) Unpack(v interface{}, name string, output []byte) error {
 	return err
 }
 
-func (c *BaseContract) Subscribe() error {
+func (c *BaseContract) Subscribe() {
+	if c.eventHandlers == nil || len(c.eventHandlers) == 0 {
+		return
+	}
 	topics := make([][]common.Hash, 1)
 	topics[0] = make([]common.Hash, 0, len(c.eventHandlers))
 	for eventSig, _ := range c.eventHandlers {
