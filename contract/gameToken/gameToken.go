@@ -14,6 +14,8 @@ const (
 	FuncConsume = "consume"
 	FuncReward = "reward"
 	FuncMint = "mint"
+	FuncEquipWeapon = "equipWeapon"
+	FuncEquipArmor = "equipArmor"
 )
 
 type GameToken struct {

@@ -19,6 +19,8 @@ const (
 	FuncPayNFT        string = "payNFT"
 	FuncExchangeToken string = "exchange"
 	FuncExchangeNFT   string = "exchangeNFT"
+	FuncEquipWeapon = "equipWeapon"
+	FuncEquipArmor = "equipArmor"
 )
 
 const (
