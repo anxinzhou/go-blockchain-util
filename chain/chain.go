@@ -97,15 +97,19 @@ func (c *EthClient) Send(tx *types.Transaction) chan error {
 	go func() {
 		err := c.Client.SendTransaction(context.Background(), tx)
 		if err != nil {
+			log.Println(err.Error())
 			txError <- err
 		}
 		receipt, receiptError := c.GetTransactionReceipt(tx.Hash())
 		select {
 		case err := <-receiptError:
+			log.Println(err.Error())
 			txError <- err
 		case r := <-receipt:
 			if r.Status == 0 {
-				txError <- errors.New("transaction revert")
+				err:= errors.New("transaction revert")
+				log.Println(err.Error())
+				txError <- err
 			} else {
 				txError <- nil
 			}
