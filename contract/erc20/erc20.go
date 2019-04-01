@@ -40,10 +40,6 @@ func (c *ERC20) BalanceOf(address common.Address) (*big.Int, error) {
 	if err != nil {
 		return nil, err
 	}
-	balance := new(big.Int)
-	err = c.Unpack(balance, funcName, data)
-	if err != nil {
-		return nil, err
-	}
-	return balance, err
+	balance := new(big.Int).SetBytes(data)
+	return balance, nil
 }

@@ -6,6 +6,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/xxRanger/blockchainUtil/contract"
 	"github.com/xxRanger/blockchainUtil/contract/erc20"
+	"log"
 	"math/big"
 )
 
@@ -54,12 +55,24 @@ func (c *GameToken) AvatarState(tokenId *big.Int) (*AvatarState,error) {
 		return nil, err
 	}
 
-	avatarState:=&AvatarState{}
-	err = c.Unpack(avatarState, funcName, data)
-	if err != nil {
-		return nil, err
+	var weaponed bool
+	var armored bool
+	if data[64]!=byte(1) {
+		weaponed = true
 	}
-	return avatarState, err
+	if data[65]!=byte(1) {
+		armored = true
+	}
+
+	log.Println(data,"len:", len(data))
+	avatarState:=&AvatarState{
+		Gene: new(big.Int).SetBytes(data[:32]),
+		AvatarLevel:new(big.Int).SetBytes(data[32:64]),
+		Weaponed: weaponed,
+		Armored: armored,
+	}
+
+	return avatarState, nil
 }
 
 func (c *GameToken) OwnedAvatar(address common.Address) (*big.Int, error) {
@@ -76,11 +89,7 @@ func (c *GameToken) OwnedAvatar(address common.Address) (*big.Int, error) {
 	if err != nil {
 		return nil, err
 	}
-	tokenId := new(big.Int)
-	err = c.Unpack(tokenId, funcName, data)
-	if err != nil {
-		return nil, err
-	}
+	tokenId := new(big.Int).SetBytes(data)
 	if tokenId.Cmp(big.NewInt(0))==0 {
 		err:=errors.New("user have no token")
 		return nil,err
