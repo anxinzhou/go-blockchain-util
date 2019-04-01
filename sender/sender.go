@@ -9,6 +9,7 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/xxRanger/blockchainUtil/chain"
 	"github.com/xxRanger/blockchainUtil/contract"
+	"log"
 	"math/big"
 	"sync"
 )
@@ -132,6 +133,7 @@ func (u *User) SendAndSignTransaction(tx *types.Transaction) chan error {
 	txError := make(chan error, 1)
 	signedTx, err := u.SignTransaction(tx)
 	if err != nil {
+		log.Println(err.Error())
 		txError <- err
 		return txError
 	}
@@ -156,11 +158,13 @@ func (u *User) SendFunction(c contract.Contract, opt *SendOpts, funcName string,
 	txError := make(chan error, 1)
 	input, err := c.Pack(funcName, args...)
 	if err != nil {
+		log.Println(err.Error())
 		txError <- err
 		return txError
 	}
 	nonce, err := u.getNonce()
 	if err != nil {
+		log.Println(err.Error())
 		txError <- err
 		return txError
 	}
