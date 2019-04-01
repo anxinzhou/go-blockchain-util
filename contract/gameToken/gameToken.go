@@ -17,6 +17,7 @@ const (
 	FuncConsume     = "consume"
 	FuncReward      = "reward"
 	FuncMint        = "mint"
+	FuncUpgrade = "upgrade"
 	FuncEquipWeapon = "equipWeapon"
 	FuncEquipArmor  = "equipArmor"
 )

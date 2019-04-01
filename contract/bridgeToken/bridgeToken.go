@@ -12,15 +12,16 @@ const (
 )
 
 const (
-	FuncMint = "mint"
-	FuncConsume = "consume"
-	FuncReward = "reward"
+	FuncMint                 = "mint"
+	FuncConsume              = "consume"
+	FuncReward               = "reward"
 	FuncPayToken      string = "pay"
 	FuncPayNFT        string = "payNFT"
 	FuncExchangeToken string = "exchange"
 	FuncExchangeNFT   string = "exchangeNFT"
-	FuncEquipWeapon = "equipWeapon"
-	FuncEquipArmor = "equipArmor"
+	FuncUpgrade              = "upgrade"
+	FuncEquipWeapon          = "equipWeapon"
+	FuncEquipArmor           = "equipArmor"
 )
 
 const (
@@ -32,7 +33,7 @@ const (
 
 type BridgeTokenEventExchangeToken struct {
 	User   common.Address `json:"user"`
-	Amount *big.Int `json:"amount"`
+	Amount *big.Int       `json:"amount"`
 }
 
 //event ExchangeNFT(uint256 tokenID, address owner, uint256 gene, uint256 avatarLevel, bool weaponed, bool armored);
