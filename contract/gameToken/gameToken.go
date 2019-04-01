@@ -54,7 +54,9 @@ func (c *GameToken) AvatarState(tokenId *big.Int) (*AvatarState,error) {
 	if err != nil {
 		return nil, err
 	}
-
+	if len(data)==0 {
+		return nil, errors.New("transaction rever");
+	}
 	var weaponed bool
 	var armored bool
 	if data[64]!=byte(1) {
