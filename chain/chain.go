@@ -82,6 +82,7 @@ func (c *EthClient) GetTransactionReceipt(txHash common.Hash) (chan *types.Recei
 				} else {
 					r, err := c.Client.TransactionReceipt(context.Background(), txHash)
 					if err == nil {
+						log.Println("found receipt")
 						receipt <- r
 						return
 					}
@@ -111,6 +112,7 @@ func (c *EthClient) Send(tx *types.Transaction) chan error {
 				log.Println(err.Error())
 				txError <- err
 			} else {
+				log.Println("transaction success")
 				txError <- nil
 			}
 		}
