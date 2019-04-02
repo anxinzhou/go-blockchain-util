@@ -59,10 +59,10 @@ func (c *GameToken) AvatarState(tokenId *big.Int) (*AvatarState,error) {
 	}
 	var weaponed bool
 	var armored bool
-	if new(big.Int).SetBytes(data[64:96]).Cmp(big.NewInt(0))==1 {
+	if new(big.Int).SetBytes(data[64:96]).Cmp(big.NewInt(1))==1 {
 		weaponed = true
 	}
-	if new(big.Int).SetBytes(data[96:128]).Cmp(big.NewInt(0))==1 {
+	if new(big.Int).SetBytes(data[96:128]).Cmp(big.NewInt(1))==1 {
 		armored = true
 	}
 
