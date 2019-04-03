@@ -79,6 +79,7 @@ func (c *EthClient) GetTransactionReceipt(txHash common.Hash) (chan *types.Recei
 				count += 1
 				if count >= MAX_WAITING_BLOCK {
 					receiptError <- errors.New("transaction time out")
+					return
 				} else {
 					r, err := c.Client.TransactionReceipt(context.Background(), txHash)
 					if err == nil {
