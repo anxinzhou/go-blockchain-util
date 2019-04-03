@@ -100,6 +100,7 @@ func (c *EthClient) Send(tx *types.Transaction) chan error {
 		if err != nil {
 			log.Println(err.Error())
 			txError <- err
+			return
 		}
 		receipt, receiptError := c.GetTransactionReceipt(tx.Hash())
 		select {
