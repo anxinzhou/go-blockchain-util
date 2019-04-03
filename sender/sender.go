@@ -20,7 +20,7 @@ func init() {
 	defaultPrivateChainValue = big.NewInt(0)
 
 	defaultPublicChainGasLimit = 800000
-	defaultPublicChainGasPrice = big.NewInt(1000000000)  // 1 Gwei
+	defaultPublicChainGasPrice = big.NewInt(10000000000)  // 10 Gwei
 	//defaultPublicChainGasPrice = big.NewInt(0)  //  only for test
 	defaultPublicChainValue = big.NewInt(0)
 }
