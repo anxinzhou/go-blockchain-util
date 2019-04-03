@@ -172,9 +172,9 @@ func (u *User) SendFunction(c contract.Contract, opt *SendOpts, funcName string,
 	contractAddress := c.Address()
 	var tx *types.Transaction
 	if opt == nil {
-		if u.chainKind == CHAIN_KIND_PRIVATE {
+		if u.chainKind == CHAIN_KIND_PUBLIC {
 			tx = types.NewTransaction(nonce, contractAddress, defaultPublicChainValue, defaultPublicChainGasLimit, defaultPublicChainGasPrice, input)
-		} else if u.chainKind == CHAIN_KIND_PUBLIC {
+		} else if u.chainKind == CHAIN_KIND_PRIVATE {
 			tx = types.NewTransaction(nonce, contractAddress, defaultPrivateChainValue, defaultPrivateChainGasLimit, defaultPrivateChainGasPrice, input)
 		} else {
 			err:= errors.New("unknown chain kind")
