@@ -32,6 +32,8 @@ type Contract interface {
 	Unpack(v interface{}, name string, output []byte) error
 	EventHandlers() map[string]eventHandler
 	Call(*ethereum.CallMsg) ([]byte, error)
+	Subscribe()
+	Bind
 }
 
 type eventHandler func([]byte)
