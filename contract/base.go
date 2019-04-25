@@ -33,7 +33,7 @@ type Contract interface {
 	EventHandlers() map[string]eventHandler
 	Call(*ethereum.CallMsg) ([]byte, error)
 	Subscribe()
-	Bind
+	BindClient(client *chain.EthClient)
 }
 
 type eventHandler func([]byte)
