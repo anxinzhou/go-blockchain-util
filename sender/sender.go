@@ -186,3 +186,36 @@ func (u *User) SendFunction(c contract.Contract, opt *SendOpts, funcName string,
 	}
 	return u.SendAndSignTransaction(tx)
 }
+
+func (u *User) SendFunction2(c contract.Contract, opt *SendOpts, funcName string, args ... interface{}) (*types.Transaction,chan error) {
+	txError := make(chan error, 1)
+	input, err := c.Pack(funcName, args...)
+	if err != nil {
+		log.Println(err.Error())
+		txError <- err
+		return nil,txError
+	}
+	nonce, err := u.getNonce()
+	if err != nil {
+		log.Println(err.Error())
+		txError <- err
+		return nil,txError
+	}
+
+	contractAddress := c.Address()
+	var tx *types.Transaction
+	if opt == nil {
+		if u.chainKind == CHAIN_KIND_PUBLIC {
+			tx = types.NewTransaction(nonce, contractAddress, defaultPublicChainValue, defaultPublicChainGasLimit, defaultPublicChainGasPrice, input)
+		} else if u.chainKind == CHAIN_KIND_PRIVATE {
+			tx = types.NewTransaction(nonce, contractAddress, defaultPrivateChainValue, defaultPrivateChainGasLimit, defaultPrivateChainGasPrice, input)
+		} else {
+			err:= errors.New("unknown chain kind")
+			txError <- err
+			return nil,txError
+		}
+	} else {
+		tx = types.NewTransaction(nonce, *opt.To, opt.Value, opt.GasLimit, opt.GasPrice, input)
+	}
+	return tx,u.SendAndSignTransaction(tx)
+}

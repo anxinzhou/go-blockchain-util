@@ -1,6 +1,7 @@
 package nft
 
 import (
+	"encoding/hex"
 	"errors"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
@@ -9,11 +10,12 @@ import (
 )
 
 const (
-	ABI = "[  {   \"constant\": false,   \"inputs\": [    {     \"name\": \"to\",     \"type\": \"address\"    },    {     \"name\": \"token_id\",     \"type\": \"uint256\"    },    {     \"name\": \"nft_type\",     \"type\": \"string\"    },    {     \"name\": \"nft_name\",     \"type\": \"string\"    },    {     \"name\": \"nft_ldef_index\",     \"type\": \"string\"    },    {     \"name\": \"dist_index\",     \"type\": \"string\"    },    {     \"name\": \"nft_life_index\",     \"type\": \"uint256\"    },    {     \"name\": \"nft_power_index\",     \"type\": \"uint256\"    },    {     \"name\": \"nft_character_id\",     \"type\": \"string\"    },    {     \"name\": \"public_key\",     \"type\": \"bytes\"    }   ],   \"name\": \"mint\",   \"outputs\": [],   \"payable\": false,   \"stateMutability\": \"nonpayable\",   \"type\": \"function\"  },  {   \"constant\": false,   \"inputs\": [    {     \"name\": \"to\",     \"type\": \"address\"    },    {     \"name\": \"token_id\",     \"type\": \"uint256\"    }   ],   \"name\": \"transfer\",   \"outputs\": [],   \"payable\": false,   \"stateMutability\": \"nonpayable\",   \"type\": \"function\"  },  {   \"inputs\": [],   \"payable\": false,   \"stateMutability\": \"nonpayable\",   \"type\": \"constructor\"  },  {   \"constant\": true,   \"inputs\": [    {     \"name\": \"owner\",     \"type\": \"address\"    }   ],   \"name\": \"balanceOf\",   \"outputs\": [    {     \"name\": \"\",     \"type\": \"uint256\"    }   ],   \"payable\": false,   \"stateMutability\": \"view\",   \"type\": \"function\"  },  {   \"constant\": true,   \"inputs\": [    {     \"name\": \"token_id\",     \"type\": \"uint256\"    }   ],   \"name\": \"infoOfToken\",   \"outputs\": [    {     \"name\": \"nft_type\",     \"type\": \"string\"    },    {     \"name\": \"nft_name\",     \"type\": \"string\"    },    {     \"name\": \"nft_ldef_index\",     \"type\": \"string\"    },    {     \"name\": \"nft_life_index\",     \"type\": \"uint256\"    },    {     \"name\": \"nft_power_index\",     \"type\": \"uint256\"    },    {     \"name\": \"nft_character_id\",     \"type\": \"string\"    },    {     \"name\": \"public_key\",     \"type\": \"bytes\"    }   ],   \"payable\": false,   \"stateMutability\": \"view\",   \"type\": \"function\"  },  {   \"constant\": true,   \"inputs\": [    {     \"name\": \"token_id\",     \"type\": \"uint256\"    }   ],   \"name\": \"ldefOfToken\",   \"outputs\": [    {     \"name\": \"nft_ldef_index\",     \"type\": \"string\"    }   ],   \"payable\": false,   \"stateMutability\": \"view\",   \"type\": \"function\"  },  {   \"constant\": true,   \"inputs\": [    {     \"name\": \"tokenId\",     \"type\": \"uint256\"    }   ],   \"name\": \"ownerOf\",   \"outputs\": [    {     \"name\": \"\",     \"type\": \"address\"    }   ],   \"payable\": false,   \"stateMutability\": \"view\",   \"type\": \"function\"  } ]"
+	ABI="[  {   \"constant\": false,   \"inputs\": [    {     \"name\": \"from\",     \"type\": \"address\"    },    {     \"name\": \"to\",     \"type\": \"address\"    },    {     \"name\": \"token_id\",     \"type\": \"uint256\"    }   ],   \"name\": \"delegateTransfer\",   \"outputs\": [],   \"payable\": false,   \"stateMutability\": \"nonpayable\",   \"type\": \"function\"  },  {   \"constant\": false,   \"inputs\": [    {     \"name\": \"to\",     \"type\": \"address\"    },    {     \"name\": \"token_id\",     \"type\": \"uint256\"    },    {     \"name\": \"nft_type\",     \"type\": \"string\"    },    {     \"name\": \"nft_name\",     \"type\": \"string\"    },    {     \"name\": \"nft_ldef_index\",     \"type\": \"string\"    },    {     \"name\": \"dist_index\",     \"type\": \"string\"    },    {     \"name\": \"nft_life_index\",     \"type\": \"uint256\"    },    {     \"name\": \"nft_power_index\",     \"type\": \"uint256\"    },    {     \"name\": \"nft_character_id\",     \"type\": \"string\"    },    {     \"name\": \"public_key\",     \"type\": \"bytes\"    }   ],   \"name\": \"mint\",   \"outputs\": [],   \"payable\": false,   \"stateMutability\": \"nonpayable\",   \"type\": \"function\"  },  {   \"constant\": false,   \"inputs\": [    {     \"name\": \"to\",     \"type\": \"address\"    },    {     \"name\": \"token_id\",     \"type\": \"uint256\"    }   ],   \"name\": \"transfer\",   \"outputs\": [],   \"payable\": false,   \"stateMutability\": \"nonpayable\",   \"type\": \"function\"  },  {   \"inputs\": [],   \"payable\": false,   \"stateMutability\": \"nonpayable\",   \"type\": \"constructor\"  },  {   \"constant\": true,   \"inputs\": [    {     \"name\": \"owner\",     \"type\": \"address\"    }   ],   \"name\": \"balanceOf\",   \"outputs\": [    {     \"name\": \"\",     \"type\": \"uint256\"    }   ],   \"payable\": false,   \"stateMutability\": \"view\",   \"type\": \"function\"  },  {   \"constant\": true,   \"inputs\": [    {     \"name\": \"token_id\",     \"type\": \"uint256\"    }   ],   \"name\": \"infoOfToken\",   \"outputs\": [    {     \"name\": \"nft_type\",     \"type\": \"string\"    },    {     \"name\": \"nft_name\",     \"type\": \"string\"    },    {     \"name\": \"nft_ldef_index\",     \"type\": \"string\"    },    {     \"name\": \"nft_life_index\",     \"type\": \"uint256\"    },    {     \"name\": \"nft_power_index\",     \"type\": \"uint256\"    },    {     \"name\": \"nft_character_id\",     \"type\": \"string\"    },    {     \"name\": \"public_key\",     \"type\": \"bytes\"    }   ],   \"payable\": false,   \"stateMutability\": \"view\",   \"type\": \"function\"  },  {   \"constant\": true,   \"inputs\": [    {     \"name\": \"token_id\",     \"type\": \"uint256\"    }   ],   \"name\": \"ldefOfToken\",   \"outputs\": [    {     \"name\": \"nft_ldef_index\",     \"type\": \"string\"    }   ],   \"payable\": false,   \"stateMutability\": \"view\",   \"type\": \"function\"  },  {   \"constant\": true,   \"inputs\": [    {     \"name\": \"tokenId\",     \"type\": \"uint256\"    }   ],   \"name\": \"ownerOf\",   \"outputs\": [    {     \"name\": \"\",     \"type\": \"address\"    }   ],   \"payable\": false,   \"stateMutability\": \"view\",   \"type\": \"function\"  } ]"
 )
 
 const (
 	FuncTransfer = "transfer"
+	FuncDelegateTransfer = "delegateTransfer"
 	FuncMint     = "mint"
 	FuncSetNFTMarketInfo = "setNFTMarketInfo"
 )
@@ -121,4 +123,21 @@ func (c *NFT) LdefOfToken(tokenId *big.Int) (*big.Int, error) {
 		return nil, err
 	}
 	return ldef, err
+}
+
+func (c *NFT) OwnerOf(tokenId *big.Int) (string,error) {
+	funcName:="ownerOf"
+	input,err:=c.Pack(funcName,tokenId)
+	if err != nil {
+		return "", err
+	}
+	contractAddress := c.Address()
+	data, err := c.Call(&ethereum.CallMsg{
+		To:   &contractAddress,
+		Data: input,
+	})
+	if err != nil {
+		return "", err
+	}
+	return "0x" + hex.EncodeToString(data[12:32]),nil
 }
