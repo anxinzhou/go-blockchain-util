@@ -174,10 +174,10 @@ func (c *NFT) TokensOfUser(address common.Address) ([]*big.Int,error) {
 	if err != nil {
 		return nil, err
 	}
-	lenOfArray:=new(big.Int).SetBytes(data[:32]).Int64()
+	step:=new(big.Int).SetBytes(data[:32]).Int64()
+	lenOfArray:=new(big.Int).SetBytes(data[32:64]).Int64()
 	tokenIds:= make([]*big.Int,lenOfArray)
-	startIndex:=32
-	step:=32
+	var startIndex int64 = 64
 	for  i:=0;i<int(lenOfArray);i++ {
 		tokenIds[i] = new(big.Int).SetBytes(data[startIndex:startIndex+step])
 		startIndex = startIndex+step
@@ -199,7 +199,7 @@ func (c *NFT) LdefIndexOfToken(tokenId *big.Int) (string,error) {
 	if err != nil {
 		return "", err
 	}
-	lenOfString:= new(big.Int).SetBytes(data[:32]).Int64()
-	nftLdefIndex:= hex.EncodeToString(data[32:32+lenOfString])
+	lenOfString:= new(big.Int).SetBytes(data[32:64]).Int64()
+	nftLdefIndex:= string(data[64:64+lenOfString])
 	return nftLdefIndex,nil
 }
