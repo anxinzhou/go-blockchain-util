@@ -1,7 +1,6 @@
 package nft
 
 import (
-	"encoding/hex"
 	"errors"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
@@ -139,7 +138,7 @@ func (c *NFT) OwnerOf(tokenId *big.Int) (string,error) {
 	if err != nil {
 		return "", err
 	}
-	return "0x" + hex.EncodeToString(data[12:32]),nil
+	return common.BytesToAddress(data[12:32]).String(),nil
 }
 
 func (c *NFT) BalanceOf(address common.Address) (*big.Int, error) {
