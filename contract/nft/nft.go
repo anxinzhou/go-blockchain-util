@@ -174,6 +174,9 @@ func (c *NFT) TokensOfUser(address common.Address) ([]*big.Int,error) {
 	if err != nil {
 		return nil, err
 	}
+	if len(data) == 0 {
+		return make([]*big.Int,0),nil
+	}
 	step:=new(big.Int).SetBytes(data[:32]).Int64()
 	lenOfArray:=new(big.Int).SetBytes(data[32:64]).Int64()
 	tokenIds:= make([]*big.Int,lenOfArray)
