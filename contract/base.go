@@ -29,7 +29,7 @@ type Contract interface {
 	ABI() *abi.ABI
 	Pack(funcName string, args ...interface{}) ([]byte, error)
 	EventSigByName(name string) (common.Hash, error)
-	Unpack(v interface{}, name string, output []byte) (interface{}, error)
+	Unpack(name string, output []byte) (interface{}, error)
 	EventHandlers() map[string]eventHandler
 	Call(*ethereum.CallMsg) ([]byte, error)
 	Subscribe()
