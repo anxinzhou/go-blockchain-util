@@ -29,7 +29,7 @@ type Contract interface {
 	ABI() *abi.ABI
 	Pack(funcName string, args ...interface{}) ([]byte, error)
 	EventSigByName(name string) (common.Hash, error)
-	Unpack(v interface{}, name string, output []byte) error
+	Unpack(v interface{}, name string, output []byte) (interface{}, error)
 	EventHandlers() map[string]eventHandler
 	Call(*ethereum.CallMsg) ([]byte, error)
 	Subscribe()
@@ -164,7 +164,7 @@ func (c *BaseContract) EventSigByName(name string) (common.Hash, error) {
 	return crypto.Keccak256Hash(sigByte), nil
 }
 
-func (c *BaseContract) Unpack(name string, output []byte) (interface{},error) {
+func (c *BaseContract) Unpack(name string, output []byte) (interface{}, error) {
 	v, err := c.abi.Unpack(name, output)
 	return v, err
 }
